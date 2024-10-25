@@ -21,7 +21,12 @@ public class UserCreationTests {
             "}";
 
     @Test
-    public void createUser() {
-        given().log().all().body(postRequestBody).contentType("application/json").when().post(properties.baseUrl + "/v2/user").then().statusCode(200);
+    public void createUserAndCheckIfExists() {
+        given().log().all().body(postRequestBody).contentType("application/json")
+                .when().post(properties.baseUrl + "/v2/user")
+                .then().log().all().statusCode(200);
+
+        given().log().all().contentType("application/json").pathParam("username", "firstuser")
+                .when().get(properties.baseUrl + "/v2/user/{username}").then().log().all().statusCode(200);
     }
 }
