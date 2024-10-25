@@ -29,6 +29,8 @@ public class BasicHttpMethods {
                 "  \"status\": \"available\"\n" +
                 "}";
 
-        given().log().all().body(postRequestBody).contentType("application/json").when().post(properties.baseUrl).then().statusCode(200);
+        given().log().all().body(postRequestBody).contentType("application/json")
+                .when().post(properties.baseUrl + "/v2/pet")
+                .then().log().all().statusCode(200);
     }
 }
