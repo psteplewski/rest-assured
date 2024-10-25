@@ -1,5 +1,6 @@
 package http.methods;
 
+import io.restassured.RestAssured;
 import org.testng.annotations.Test;
 import utils.Properties;
 
@@ -32,5 +33,10 @@ public class BasicHttpMethods {
         given().log().all().body(postRequestBody).contentType("application/json")
                 .when().post(properties.baseUrl + "/v2/pet")
                 .then().log().all().statusCode(200);
+    }
+
+    @Test
+    public void givenExistingPetIdWhenGetPetThenReturnPetTest() {
+        RestAssured.given().log().all().when().baseUri(properties.baseUrl + "/v2/pet/1").then().statusCode(200);
     }
 }
