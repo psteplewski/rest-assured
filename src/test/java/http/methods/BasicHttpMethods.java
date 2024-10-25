@@ -1,6 +1,5 @@
 package http.methods;
 
-import io.restassured.RestAssured;
 import org.testng.annotations.Test;
 import utils.Properties;
 
@@ -56,21 +55,21 @@ public class BasicHttpMethods {
 
     @Test
     public void givenExistingPetIdWhenGetPetThenReturnPetTest() {
-        RestAssured.given().log().all().pathParam("petId", 1).
+       given().log().all().pathParam("petId", 1).
                 when().baseUri(properties.baseUrl + "/v2/pet/{petId}").
                 then().statusCode(200).log().all();
     }
 
     @Test
     public void putRequest() {
-        RestAssured.given().log().all().body(requestBody2).contentType("application/json")
+        given().log().all().body(requestBody2).contentType("application/json")
                 .put(properties.baseUrl+"/v2/pet")
                 .then().log().all().statusCode(200);
     }
 
     @Test
     public void deleteRequest() {
-        RestAssured.given().log().all().pathParam("petId",1)
+        given().log().all().pathParam("petId",1)
                 .delete(properties.baseUrl+"/v2/pet/{petId}")
                 .then().log().all().statusCode(200);
     }
