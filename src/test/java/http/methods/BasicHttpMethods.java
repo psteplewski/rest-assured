@@ -1,13 +1,11 @@
 package http.methods;
 
 import org.testng.annotations.Test;
-import pojo.Category;
-import pojo.Pet;
-import pojo.Tag;
+import pojo.pet.Category;
+import pojo.pet.Pet;
+import pojo.pet.Tag;
 import utils.Properties;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 import static io.restassured.RestAssured.given;

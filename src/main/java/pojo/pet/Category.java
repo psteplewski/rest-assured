@@ -1,4 +1,4 @@
-package pojo;
+package pojo.pet;
 
 import lombok.Getter;
 import lombok.Setter;

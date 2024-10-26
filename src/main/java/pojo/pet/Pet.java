@@ -1,4 +1,4 @@
-package pojo;
+package pojo.pet;
 
 import java.util.LinkedHashMap;
 import java.util.List;
