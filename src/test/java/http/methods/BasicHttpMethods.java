@@ -1,7 +1,14 @@
 package http.methods;
 
 import org.testng.annotations.Test;
+import pojo.Category;
+import pojo.Pet;
+import pojo.Tag;
 import utils.Properties;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import static io.restassured.RestAssured.given;
 
@@ -48,7 +55,23 @@ public class BasicHttpMethods {
 
     @Test
     public void givenPetWhenPostPetThenPetIsCreatedTest() {
-        given().log().all().body(requestBody1).contentType("application/json")
+        Category category = new Category();
+        category.setId(1);
+        category.setName("dogs");
+
+        Tag tag = new Tag();
+        tag.setId(1);
+        tag.setName("Reksio");
+
+        Pet pet = new Pet();
+        pet.setId(1);
+        pet.setName("Reksio");
+        pet.setCategory(category);
+        pet.setPhotoUrls(Collections.singletonList("http://photos.com/dog1.jpg"));
+        pet.setTags(Collections.singletonList(tag));
+        pet.setStatus("available");
+
+        given().log().all().body(pet).contentType("application/json")
                 .when().post(properties.baseUrl + "/v2/pet")
                 .then().log().all().statusCode(200);
     }
