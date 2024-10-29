@@ -1,5 +1,6 @@
 package serialization;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pojo.pet.Category;
@@ -31,7 +32,7 @@ public class SerializationAndDeserializationTests {
         pet.setTags(Collections.singletonList(tag));
         pet.setStatus("available");
 
-        Pet actualPet = given().log().all().body(pet).contentType("application/json")
+        Pet actualPet = given().filter(new AllureRestAssured()).log().all().body(pet).contentType("application/json")
                 .when().post("https://swaggerpetstore.przyklady.javastart.pl/v2/pet")
                 .then().log().all().statusCode(200).extract().as(Pet.class);
 

@@ -1,5 +1,9 @@
 package http.methods;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.TmsLink;
 import org.testng.annotations.Test;
 import pojo.pet.Category;
 import pojo.pet.Pet;
@@ -9,14 +13,19 @@ import utils.Properties;
 import utils.TestDataGenerator;
 
 import java.util.Collections;
+import io.qameta.allure.restassured.AllureRestAssured;
+
 
 import static io.restassured.RestAssured.given;
 
-public class BasicHttpMethods extends TestDataGenerator {
-    
+public class PetTests extends TestDataGenerator {
+
     Properties properties = new Properties();
 
-    @Test(testName = "POST request for Pet creation")
+    @Test
+    @Description("Description field")
+    @TmsLink("TC-123") //ID test case form Test Management system, configurable in allure.properties
+    @Severity(SeverityLevel.CRITICAL)
     public void givenPetWhenPostPetThenPetIsCreatedTest() {
         Category category = new Category();
         category.setId(faker().number().numberBetween(1, 9999));
@@ -34,29 +43,29 @@ public class BasicHttpMethods extends TestDataGenerator {
         pet.setTags(Collections.singletonList(tag));
         pet.setStatus("available");
 
-        given().log().all().body(pet).contentType("application/json")
+        given().filter(new AllureRestAssured()).log().all().body(pet).contentType("application/json")
                 .when().post(properties.baseUrl + "/v2/pet")
                 .then().log().all().statusCode(200);
     }
 
-    @Test(testName = "GET request for Pet")
+    @Test
     public void givenExistingPetIdWhenGetPetThenReturnPetTest() {
-        given().log().all().pathParam("petId", 1).
+        given().filter(new AllureRestAssured()).log().all().pathParam("petId", 1).
                 when().baseUri(properties.baseUrl + "/v2/pet/{petId}").
                 then().statusCode(200).log().all();
     }
 
-    @Test(testName = "PUT request for Pet")
+    @Test
     public void putRequest() {
         Pet petRequestBody = new PetTestDataGenerator().generatePet();
-        given().log().all().body(petRequestBody).contentType("application/json")
+        given().filter(new AllureRestAssured()).log().all().body(petRequestBody).contentType("application/json")
                 .put(properties.baseUrl + "/v2/pet")
                 .then().log().all().statusCode(200);
     }
 
     @Test
     public void deleteRequest() {
-        given().log().all().pathParam("petId", 1)
+        given().filter(new AllureRestAssured()).log().all().pathParam("petId", 1)
                 .delete(properties.baseUrl + "/v2/pet/{petId}")
                 .then().log().all().statusCode(200);
     }
