@@ -25,10 +25,10 @@ public class PetTests extends TestDataGenerator {
 
 
     @Test
-    @Description("Description field")
+    @Description("POST request for Pet creation")
     @TmsLink("TC-123") //ID test case form Test Management system, configurable in allure.properties
     @Severity(SeverityLevel.CRITICAL)
-    public void givenPetWhenPostPetThenPetIsCreatedTest() {
+    public void postPetRequest() {
 
         actualPet = given().spec(headers)
                 .body(requestBody).contentType("application/json")
