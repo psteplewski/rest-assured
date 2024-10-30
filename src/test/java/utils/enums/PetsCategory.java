@@ -2,7 +2,6 @@ package utils.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Getter
@@ -11,6 +10,6 @@ public enum PetsCategory {
     CATS(2, "cats"),
     OTHER(3, "other");
 
-    private int id;
-    private String categoryName;
+    private final int id;
+    private final String categoryName;
 }

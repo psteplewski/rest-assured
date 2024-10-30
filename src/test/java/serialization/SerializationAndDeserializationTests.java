@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import pojo.pet.Category;
 import pojo.pet.Pet;
 import pojo.pet.Tag;
-import pojo.user.User;
 
 import java.util.Collections;
 

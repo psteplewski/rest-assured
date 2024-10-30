@@ -9,6 +9,6 @@ public enum PetTag {
     YOUNG_PET(1, "young-pet"),
     ADULT_PET(2, "adult-pet");
 
-    private int id;
-    private String tagyName;
+    private final int id;
+    private final String tagName;
 }

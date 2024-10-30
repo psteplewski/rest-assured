@@ -6,9 +6,9 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum PetStatus {
-    AVALIABLE("available"),
+    AVAILABLE("available"),
     PENDING("pending"),
     SOLD("sold");
-    
-    private String status;
+
+    private final String status;
 }

@@ -14,9 +14,6 @@ import utils.PetTestDataGenerator;
 import utils.Properties;
 import utils.TestDataGenerator;
 
-import io.qameta.allure.restassured.AllureRestAssured;
-
-
 import static io.restassured.RestAssured.given;
 
 public class PetTests extends TestDataGenerator {
@@ -24,7 +21,6 @@ public class PetTests extends TestDataGenerator {
     Properties properties = new Properties();
     Pet actualPet;
     private final RequestSpecification headers = RequestConfigurationBuilder.getDefaultRequestSpecification();
-    ;
     private final Pet requestBody = new PetTestDataGenerator().generatePet();
 
 
