@@ -18,7 +18,7 @@ public class PetTestDataGenerator extends TestDataGenerator {
 
         Tag tag = new Tag();
         tag.setId(petsCategory.getId());
-        tag.setName(petTag.getTagyName());
+        tag.setName(petTag.getTagName());
 
         Category category = new Category();
         category.setId(petsCategory.getId());
