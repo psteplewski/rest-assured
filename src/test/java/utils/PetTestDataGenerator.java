@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class PetTestDataGenerator extends TestDataGenerator {
 
-    public Pet generatePet() {
+    public Pet generatePetData() {
         PetsCategory petsCategory = randomPetCategory();
         PetTag petTag = randomPetTag();
 

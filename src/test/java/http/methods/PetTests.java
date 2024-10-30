@@ -21,7 +21,7 @@ public class PetTests extends TestDataGenerator {
     Properties properties = new Properties();
     Pet actualPet;
     private final RequestSpecification headers = RequestConfigurationBuilder.getDefaultRequestSpecification();
-    private final Pet requestBody = new PetTestDataGenerator().generatePet();
+    private final Pet requestBody = new PetTestDataGenerator().generatePetData();
 
 
     @Test
@@ -31,7 +31,7 @@ public class PetTests extends TestDataGenerator {
     public void postPetRequest() {
 
         actualPet = given().spec(headers)
-                .body(requestBody).contentType("application/json")
+                .body(requestBody)
                 .when().post(properties.baseUrl + "/v2/pet")
                 .then().statusCode(HttpStatus.SC_OK).log().all()
                 .extract().as(Pet.class);
