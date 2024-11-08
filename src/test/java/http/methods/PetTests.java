@@ -39,25 +39,50 @@ public class PetTests extends TestDataGenerator {
         Assertions.assertThat(actualPet).describedAs("Send Pet was different than received by API").isEqualToComparingFieldByFieldRecursively(requestBody);
     }
 
-    @Test
-    public void givenExistingPetIdWhenGetPetThenReturnPetTest() {
-        given().spec(headers).pathParam("petId", 1).
+    /**
+     * Request for get data about Pet
+     *
+     * @param expectedHTTPStatus excepted HTTP response status code
+     * @param id petId
+     * @return object of this class
+     */
+    public PetTests getRequest(int expectedHTTPStatus, int id) {
+        given().spec(headers).pathParam("petId", id).
                 when().get(properties.baseUrl + "/v2/pet/{petId}").
-                then().statusCode(HttpStatus.SC_OK).log().all();
+                then().statusCode(expectedHTTPStatus).log().all();
+        return this;
     }
 
-    @Test
-    public void putRequest() {
+    /**
+     * Request for update Pet
+     *
+     * @param expectedHTTPStatus excepted HTTP response status code
+     * @return object of this class
+     */
+    public PetTests putRequest(int expectedHTTPStatus) {
         given().spec(headers)
                 .body(requestBody)
                 .put(properties.baseUrl + "/v2/pet")
-                .then().statusCode(HttpStatus.SC_OK).log().all();
+                .then().statusCode(expectedHTTPStatus).log().all();
+        return this;
+    }
+
+    /**
+     * Request for delete Pet
+     *
+     * @param expectedHTTPStatus excepted HTTP response status code
+     * @param id petId
+     * @return object of this class
+     */
+    public PetTests deleteRequest(int expectedHTTPStatus, int id) {
+        given().spec(headers).pathParam("petId", id)
+                .delete(properties.baseUrl + "/v2/pet/{petId}")
+                .then().statusCode(expectedHTTPStatus).log().all();
+        return this;
     }
 
     @Test
-    public void deleteRequest() {
-        given().spec(headers).pathParam("petId", 1)
-                .delete(properties.baseUrl + "/v2/pet/{petId}")
-                .then().statusCode(HttpStatus.SC_OK).log().all();
+    public void test() {
+        putRequest(HttpStatus.SC_OK).deleteRequest(HttpStatus.SC_OK,2).getRequest(HttpStatus.SC_NOT_FOUND, 2);
     }
 }
